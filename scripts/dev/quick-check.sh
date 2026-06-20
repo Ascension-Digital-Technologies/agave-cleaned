@@ -2,6 +2,4 @@
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/lib/common.sh"
 run scripts/dev/github-ready.sh
 run scripts/dev/metadata.sh
-run scripts/dev/fmt.sh
-run scripts/dev/clippy.sh
-log "Standard development checks passed"
+log "Quick check passed"

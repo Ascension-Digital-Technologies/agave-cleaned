@@ -141,12 +141,17 @@ This verifies layout, workspace path dependencies, local Markdown links, script 
 | --- | --- |
 | `make help` | Show the primary developer commands. |
 | `make bootstrap` | Check local tool availability. |
-| `make layout` | Validate the cleaned repository layout and Cargo paths. |
+| `make env` | Print OS, Git, Rust, Cargo, native tool, and workspace diagnostics. |
+| `make layout` | Validate the cleaned repository layout, Cargo paths, and workspace summary. |
 | `make metadata` | Run `cargo metadata --no-deps` without compiling the full tree. |
+| `make build` | Build the workspace with locked dependencies. |
 | `make github-ready` | Run a lightweight pre-publish hygiene gate. |
+| `make quick-check` | Run GitHub-readiness checks plus Cargo metadata. |
+| `make check` | Run the standard local development gate: hygiene, metadata, fmt, and clippy. |
+| `make full-check` | Run the full local gate including tests. |
 | `make clean-generated` | Remove generated local caches. |
 | `make map` | Print a compact top-level repository map. |
-| `make check` | Run the standard local development gate. |
+| `make summary` | Print Cargo workspace member/file/domain counts. |
 
 ### Rust workspace commands
 

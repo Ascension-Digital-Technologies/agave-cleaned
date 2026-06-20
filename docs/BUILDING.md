@@ -86,11 +86,22 @@ make metadata
 make github-ready
 ```
 
-Equivalent scripts:
+Useful script equivalents:
 
 ```bash
+scripts/dev/env.sh
 scripts/dev/layout.sh
 scripts/dev/github-ready.sh
+scripts/dev/quick-check.sh
+```
+
+For Windows CMD:
+
+```cmd
+scripts\dev\env-windows.cmd
+scripts\dev\layout-windows.cmd
+scripts\dev\github-ready-windows.cmd
+scripts\dev\quick-check-windows.cmd
 ```
 
 ## Formatting
@@ -137,10 +148,30 @@ This uses the checked-in nextest profile:
 
 ## Full local pre-publish flow
 
+For a fast no-compile pass:
+
 ```bash
-make clean-generated
-make github-ready
-make metadata
+make quick-check
+```
+
+For the standard developer gate:
+
+```bash
+make check
+```
+
+For the fullest local gate, including tests:
+
+```bash
+make full-check
+```
+
+Equivalent direct scripts:
+
+```bash
+scripts/dev/quick-check.sh
+scripts/dev/check.sh
+scripts/dev/full-check.sh
 ```
 
 For source-level changes, also run:

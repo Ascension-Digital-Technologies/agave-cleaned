@@ -7,10 +7,11 @@ call scripts\dev\github-ready-windows.cmd || goto :fail
 call scripts\dev\metadata-windows.cmd || goto :fail
 call scripts\dev\fmt-windows.cmd || goto :fail
 call scripts\dev\clippy-windows.cmd || goto :fail
-echo Standard development checks passed.
+call scripts\dev\test-windows.cmd || goto :fail
+echo Full local gate passed.
 pause
 exit /b 0
 :fail
-echo Standard development checks failed.
+echo Full local gate failed.
 pause
 exit /b 1

@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/lib/common.sh"
-run ./cargo fmt --all --check
+run_cargo fmt --all -- --check "$@"
