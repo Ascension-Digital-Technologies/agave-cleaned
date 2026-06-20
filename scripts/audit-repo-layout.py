@@ -15,7 +15,8 @@ ALLOWED_ROOT_DIRS = {
 ALLOWED_ROOT_FILES = {
     ".editorconfig", ".gitattributes", ".gitignore", "CHANGELOG.md",
     "CONTRIBUTING.md", "Cargo.lock", "Cargo.toml", "LICENSE", "Makefile",
-    "README.md", "RELEASE.md", "SECURITY.md", "cargo", "cargo-build-sbf",
+    "README.md", "RELEASE.md", "SECURITY.md", "SUPPORT.md", "UPSTREAM.md",
+    "CODE_OF_CONDUCT.md", "cargo", "cargo-build-sbf",
     "cargo-test-sbf", "clippy.toml", "rust-toolchain.toml", "rustfmt.toml",
 }
 SKIP_DIRS = {".git", "target"}
@@ -72,7 +73,7 @@ def main() -> int:
         if not root.exists():
             continue
         for path in root.rglob("*"):
-            if not path.is_file() or path.name == "audit-repo-layout.py":
+            if not path.is_file() or path.name in {"audit-repo-layout.py", "path-map.py", "path_map.py"}:
                 continue
             if any(part in SKIP_DIRS for part in path.parts):
                 continue

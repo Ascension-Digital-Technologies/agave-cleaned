@@ -1,5 +1,12 @@
 # Agave Professional
 
+[![GitHub Ready](../../actions/workflows/github-ready.yml/badge.svg)](../../actions/workflows/github-ready.yml)
+[![Source Integrity](../../actions/workflows/source-integrity.yml/badge.svg)](../../actions/workflows/source-integrity.yml)
+[![Rust Metadata](../../actions/workflows/rust-metadata.yml/badge.svg)](../../actions/workflows/rust-metadata.yml)
+[![CodeQL](../../actions/workflows/codeql.yml/badge.svg)](../../actions/workflows/codeql.yml)
+![Unofficial cleanup](https://img.shields.io/badge/status-unofficial%20cleanup-orange)
+![Upstream Agave](https://img.shields.io/badge/upstream-anza--xyz%2Fagave-blue)
+
 A clean, GitHub-ready presentation of the official [Anza Agave](https://github.com/anza-xyz/agave) codebase. This repository was created as an unofficial cleaned-up and restructured repo for easier navigation, review, onboarding, and local maintenance; it is not an official Agave release.
 
 Agave is the validator and client implementation maintained by Anza for the Solana network. This workspace keeps the upstream Agave source recognizable while presenting the project in a cleaner repository layout.
@@ -49,12 +56,18 @@ Helpful entry points:
 | File | Purpose |
 | --- | --- |
 | [`docs/README.md`](docs/README.md) | Documentation hub. |
+| [`UPSTREAM.md`](UPSTREAM.md) | Upstream provenance and source-of-truth notes. |
+| [`docs/UPSTREAM_SYNC.md`](docs/UPSTREAM_SYNC.md) | How to sync from official Agave. |
+| [`docs/SOURCE_INTEGRITY.md`](docs/SOURCE_INTEGRITY.md) | Source manifest and verification policy. |
+| [`docs/RESTRUCTURE_POLICY.md`](docs/RESTRUCTURE_POLICY.md) | Cleanup/restructure boundaries. |
 | [`docs/REPO_STRUCTURE.md`](docs/REPO_STRUCTURE.md) | Repository layout rules. |
 | [`docs/WORKSPACE_GUIDE.md`](docs/WORKSPACE_GUIDE.md) | Workspace organization guide. |
 | [`docs/MIGRATION_MAP.md`](docs/MIGRATION_MAP.md) | Path map for translating upstream locations into this cleaned layout. |
 | [`docs/BUILDING.md`](docs/BUILDING.md) | Build and toolchain notes. |
 | [`docs/SCRIPTS.md`](docs/SCRIPTS.md) | Developer script reference. |
 | [`docs/NO_CODE_CHANGES.md`](docs/NO_CODE_CHANGES.md) | Source-behavior preservation policy. |
+| [`docs/GITHUB_SETTINGS.md`](docs/GITHUB_SETTINGS.md) | Recommended GitHub repository settings. |
+| [`docs/RELEASE_PROCESS.md`](docs/RELEASE_PROCESS.md) | Cleaned snapshot release process. |
 | [`scripts/README.md`](scripts/README.md) | Script catalog and conventions. |
 
 ## Getting started
@@ -90,13 +103,14 @@ sudo dnf install -y \
   protobuf-devel protobuf-compiler perl-core libclang-dev
 ```
 
-Windows users can start with the helper wrapper:
+Windows users can start with the helper wrappers:
 
 ```cmd
 scripts\dev\bootstrap-windows.cmd
+scripts\dev\diagnose-windows-build.cmd
 ```
 
-See [`docs/BUILDING.md`](docs/BUILDING.md) and [`docs/WINDOWS_BUILD.md`](docs/WINDOWS_BUILD.md) for more setup notes.
+For `x86_64-pc-windows-gnu`, install MSYS2/MinGW and use the Windows wrappers so vendored OpenSSL sees MSYS2 Perl instead of native Windows Perl and receives forward-slash MinGW compiler paths. See [`docs/BUILDING.md`](docs/BUILDING.md), [`docs/WINDOWS_BUILD.md`](docs/WINDOWS_BUILD.md), and [`docs/WINDOWS_CARGO.md`](docs/WINDOWS_CARGO.md).
 
 ### 3. Inspect the local environment
 
@@ -147,6 +161,11 @@ This checks the cleaned top-level layout, Cargo path dependencies, and workspace
 | `make clean-generated` | Remove generated local caches. |
 | `make map` | Print a compact top-level repository map. |
 | `make summary` | Print workspace member, file, and domain counts. |
+| `make source-manifest` | Regenerate `docs/source-manifest.json`. |
+| `make verify-source-integrity` | Verify source files against the committed manifest. |
+| `make verify-upstream UPSTREAM=/path/to/agave` | Compare cleaned source files against a local upstream checkout. |
+| `make clean-path P=programs/sbf` | Translate an upstream path into the cleaned layout. |
+| `make upstream-path P=crates/programs/sbf` | Translate a cleaned path into the upstream layout. |
 
 ### Direct Cargo commands
 
@@ -163,21 +182,26 @@ This checks the cleaned top-level layout, Cargo path dependencies, and workspace
 
 ### Windows wrappers
 
-Windows command wrappers live under [`scripts/dev/`](scripts/dev/). They pause before exiting so results are visible when launched from a terminal or file explorer.
+Windows command wrappers live under [`scripts/dev/`](scripts/dev/). They pause before exiting and prepare the MSYS2/MinGW environment before Cargo runs, which avoids the common vendored OpenSSL `MSWin32` Perl failure and the MSYS shell `C:msys64mingw64bingcc.exe` path-mangling failure on the GNU target.
 
 | Script | Purpose |
 | --- | --- |
+| `scripts\dev\bootstrap-windows.cmd` | Check required tools and MSYS2 discovery. |
+| `scripts\dev\diagnose-windows-build.cmd` | Diagnose Rust, Perl, MinGW, Make, and bindgen setup. |
 | `scripts\dev\env-windows.cmd` | Print environment diagnostics. |
 | `scripts\dev\layout-windows.cmd` | Validate layout and Cargo paths. |
 | `scripts\dev\github-ready-windows.cmd` | Run the lightweight GitHub-readiness gate. |
 | `scripts\dev\metadata-windows.cmd` | Run Cargo metadata. |
-| `scripts\dev\build-windows.cmd` | Build the workspace. |
+| `scripts\build.bat` | Build the workspace. |
+| `scripts\dev\repair-windows-openssl.cmd` | Clear stale `openssl-sys` build state and rebuild. |
 | `scripts\dev\fmt-windows.cmd` | Check Rust formatting. |
 | `scripts\dev\fmt-fix-windows.cmd` | Apply Rust formatting. |
 | `scripts\dev\clippy-windows.cmd` | Run clippy. |
 | `scripts\dev\test-windows.cmd` | Run nextest or Cargo tests. |
 | `scripts\dev\quick-check-windows.cmd` | Run the quick local gate. |
+| `scripts\dev\check-windows.cmd` | Run the standard local gate. |
 | `scripts\dev\full-check-windows.cmd` | Run the full local gate. |
+| `scripts\dev\enter-windows-cargo-env.cmd` | Open a shell with the Cargo/MSYS2 environment prepared. |
 
 ## Testing
 
@@ -243,6 +267,7 @@ Before publishing, opening a pull request, or handing off the repo, run:
 
 ```bash
 make github-ready
+make verify-source-integrity
 ```
 
 For a deeper local pass:
@@ -251,7 +276,7 @@ For a deeper local pass:
 make full-check
 ```
 
-The lightweight readiness gate checks layout, local Cargo path dependencies, Markdown links, script permissions, and generated-cache cleanliness. The full gate additionally runs metadata, formatting, clippy, and tests when the required Rust tooling is available.
+The lightweight readiness gate checks layout, local Cargo path dependencies, Markdown links, script permissions, generated-cache cleanliness, and source-manifest integrity. The full gate additionally runs metadata, formatting, clippy, and tests when the required Rust tooling is available.
 
 ## Release and production notes
 

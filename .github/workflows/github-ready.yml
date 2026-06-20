@@ -1,0 +1,20 @@
+name: GitHub Ready
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  github-ready:
+    name: Repository hygiene
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Run GitHub-readiness checks
+        run: scripts/dev/github-ready.sh

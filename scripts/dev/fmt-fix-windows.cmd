@@ -1,6 +1,7 @@
 @echo off
 setlocal
 cd /d "%~dp0\..\.."
+call scripts\dev\lib\windows-cargo-env.cmd
 echo ==^> Formatting Rust workspace
 cargo fmt --all %*
 set STATUS=%ERRORLEVEL%

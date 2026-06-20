@@ -35,16 +35,19 @@ The scripts folder is now a practical developer toolbox for the cleaned Agave wo
 
 ## Windows wrappers
 
-All Windows wrappers pause before exit unless they are called by another wrapper.
+All Windows wrappers pause before exit unless they are called by another wrapper. Cargo-taking wrappers also prepare the MSYS2/MinGW environment before running Cargo so vendored OpenSSL resolves MSYS2 Perl instead of native Windows Perl, and so OpenSSL Makefiles receive forward-slash MinGW compiler paths.
 
 | Script | Purpose |
 | --- | --- |
 | [`../scripts/dev/bootstrap-windows.cmd`](../scripts/dev/bootstrap-windows.cmd) | Windows bootstrap helper. |
+| [`../scripts/dev/diagnose-windows-build.cmd`](../scripts/dev/diagnose-windows-build.cmd) | Diagnose Windows Rust, Perl, MSYS2, MinGW, and bindgen setup. |
+| [`../scripts/dev/enter-windows-cargo-env.cmd`](../scripts/dev/enter-windows-cargo-env.cmd) | Open a prepared Cargo/MSYS2 command shell. |
 | [`../scripts/dev/env-windows.cmd`](../scripts/dev/env-windows.cmd) | Windows environment report. |
 | [`../scripts/dev/layout-windows.cmd`](../scripts/dev/layout-windows.cmd) | Windows layout/path checks. |
 | [`../scripts/dev/github-ready-windows.cmd`](../scripts/dev/github-ready-windows.cmd) | Windows lightweight GitHub-readiness gate. |
 | [`../scripts/dev/metadata-windows.cmd`](../scripts/dev/metadata-windows.cmd) | Windows Cargo metadata check. |
-| [`../scripts/dev/build-windows.cmd`](../scripts/dev/build-windows.cmd) | Windows workspace build. |
+| [`../scripts/build.bat`](../scripts/build.bat) | Windows workspace build. |
+| [`../scripts/dev/repair-windows-openssl.cmd`](../scripts/dev/repair-windows-openssl.cmd) | Clear stale `openssl-sys` build state and rebuild. |
 | [`../scripts/dev/fmt-windows.cmd`](../scripts/dev/fmt-windows.cmd) | Windows formatting check. |
 | [`../scripts/dev/fmt-fix-windows.cmd`](../scripts/dev/fmt-fix-windows.cmd) | Windows formatting fix. |
 | [`../scripts/dev/clippy-windows.cmd`](../scripts/dev/clippy-windows.cmd) | Windows clippy run. |
@@ -72,3 +75,16 @@ All Windows wrappers pause before exit unless they are called by another wrapper
 5. Avoid hard-coding old root-level crate paths; use the cleaned paths from [`MIGRATION_MAP.md`](MIGRATION_MAP.md).
 6. Prefer short scripts that delegate to Cargo or Make targets instead of duplicating logic.
 7. Run `make github-ready` before publishing documentation or layout changes.
+
+
+## Provenance and integrity helpers
+
+| Command | Purpose |
+| --- | --- |
+| `make source-manifest` | Regenerate `docs/source-manifest.json`. |
+| `make verify-source-integrity` | Verify current source files against the committed manifest. |
+| `make verify-upstream UPSTREAM=/path/to/agave` | Compare cleaned source files against a local upstream checkout. |
+| `make clean-path P=programs/sbf` | Translate an upstream path into the cleaned layout. |
+| `make upstream-path P=crates/programs/sbf` | Translate a cleaned path into the upstream layout. |
+
+Windows wrappers are available as `scripts\dev\source-manifest-windows.cmd` and `scripts\dev\verify-source-integrity-windows.cmd`.

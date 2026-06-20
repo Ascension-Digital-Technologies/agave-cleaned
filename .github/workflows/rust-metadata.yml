@@ -1,0 +1,40 @@
+name: Rust Metadata
+
+on:
+  pull_request:
+    paths:
+      - "Cargo.toml"
+      - "Cargo.lock"
+      - "**/Cargo.toml"
+      - ".cargo/**"
+      - ".config/**"
+      - "rust-toolchain.toml"
+      - "scripts/dev/metadata.sh"
+  push:
+    branches: [main]
+    paths:
+      - "Cargo.toml"
+      - "Cargo.lock"
+      - "**/Cargo.toml"
+      - ".cargo/**"
+      - ".config/**"
+      - "rust-toolchain.toml"
+      - "scripts/dev/metadata.sh"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  metadata:
+    name: Cargo metadata
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Install Rust toolchain
+        run: |
+          rustup show
+          rustup component add rustfmt clippy || true
+      - name: Run Cargo metadata
+        run: scripts/dev/metadata.sh

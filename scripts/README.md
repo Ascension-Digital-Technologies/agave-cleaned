@@ -33,19 +33,27 @@ This folder is the developer toolbox for the cleaned Agave workspace. It keeps t
 | `scripts/dev/check.sh` | Run hygiene, metadata, fmt, and clippy. |
 | `scripts/dev/full-check.sh` | Run hygiene, metadata, fmt, clippy, and tests. |
 | `scripts/dev/clean-generated.sh` | Remove generated local caches before publishing. |
+| `scripts/dev/generate-source-manifest.sh` | Regenerate `docs/source-manifest.json`. |
+| `scripts/dev/verify-source-integrity.sh` | Verify source files against the committed manifest. |
+| `scripts/dev/verify-upstream.sh` | Compare cleaned source files with a local upstream checkout. |
+| `scripts/dev/clean-path.sh` | Translate an upstream path into the cleaned layout. |
+| `scripts/dev/upstream-path.sh` | Translate a cleaned path into the upstream layout. |
 
 ## Windows wrappers
 
-Windows wrappers pause before exit so double-click or terminal runs do not immediately close.
+Windows wrappers pause before exit so double-click or terminal runs do not immediately close. Cargo-taking wrappers also prepare the MSYS2/MinGW environment before running Cargo so vendored OpenSSL resolves MSYS2 Perl instead of native Windows Perl, and so OpenSSL Makefiles receive forward-slash MinGW compiler paths.
 
 | Script | Purpose |
 | --- | --- |
 | `scripts/dev/bootstrap-windows.cmd` | Windows tool check and next-step guidance. |
+| `scripts/dev/diagnose-windows-build.cmd` | Diagnose Windows Rust, Perl, MSYS2, MinGW, and bindgen setup. |
+| `scripts/dev/enter-windows-cargo-env.cmd` | Open a prepared Cargo/MSYS2 command shell. |
 | `scripts/dev/env-windows.cmd` | Windows environment and workspace diagnostics. |
 | `scripts/dev/layout-windows.cmd` | Windows layout/path checks. |
 | `scripts/dev/github-ready-windows.cmd` | Windows lightweight pre-publish gate. |
 | `scripts/dev/metadata-windows.cmd` | Windows Cargo metadata check. |
-| `scripts/dev/build-windows.cmd` | Windows workspace build. |
+| `scripts/build.bat` | Windows workspace build. |
+| `scripts/dev/repair-windows-openssl.cmd` | Clear stale `openssl-sys` build state and rebuild. |
 | `scripts/dev/fmt-windows.cmd` | Windows formatting check. |
 | `scripts/dev/fmt-fix-windows.cmd` | Windows formatting fix. |
 | `scripts/dev/clippy-windows.cmd` | Windows clippy check. |
@@ -54,6 +62,8 @@ Windows wrappers pause before exit so double-click or terminal runs do not immed
 | `scripts/dev/quick-check-windows.cmd` | Windows quick local gate. |
 | `scripts/dev/check-windows.cmd` | Windows standard development gate. |
 | `scripts/dev/full-check-windows.cmd` | Windows full local gate. |
+| `scripts/dev/source-manifest-windows.cmd` | Windows source manifest generation. |
+| `scripts/dev/verify-source-integrity-windows.cmd` | Windows source-integrity verification. |
 
 ## Utility scripts
 
@@ -63,6 +73,9 @@ Windows wrappers pause before exit so double-click or terminal runs do not immed
 | `scripts/check-workspace-paths.py` | Validate all local Cargo path dependencies. |
 | `scripts/workspace-summary.py` | Print workspace member/file/domain counts. |
 | `scripts/repo-map.py` | Print a compact root map. |
+| `scripts/dev/source-manifest.py` | Generate and verify the committed source manifest. |
+| `scripts/dev/path-map.py` | Translate paths between upstream and cleaned layouts. |
+| `scripts/dev/compare-upstream-source.py` | Compare cleaned source files against a local upstream checkout. |
 
 ## Script conventions
 
@@ -72,3 +85,14 @@ Windows wrappers pause before exit so double-click or terminal runs do not immed
 - Avoid one-off root scripts.
 - Avoid hard-coding old root-level crate paths; use the cleaned paths from `docs/MIGRATION_MAP.md`.
 - Prefer short scripts that delegate to Cargo or Make targets instead of duplicating logic.
+
+
+## Windows GNU build entrypoint
+
+Use the top-level scripts entrypoint, not a root batch file:
+
+```cmd
+scripts\build.bat
+```
+
+The build script runs `scripts\setup-windows.ps1`, generates `.cargo\env-windows.ps1` and `.cargo\env-windows.bat`, then builds the workspace. The generated environment uses bare GNU tool names like `gcc`, `g++`, `ar`, `ranlib`, and `mingw32-make` instead of absolute `C:\...` compiler paths so vendored OpenSSL does not get broken by MSYS shell path conversion.

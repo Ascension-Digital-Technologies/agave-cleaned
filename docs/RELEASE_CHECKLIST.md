@@ -8,11 +8,15 @@ This checklist is for publishing the cleaned repository, not for changing Agave 
 - [ ] Review [`GITHUB_READY.md`](GITHUB_READY.md).
 - [ ] Run `make clean-generated`.
 - [ ] Run `make github-ready`.
+- [ ] Run `make source-manifest`.
+- [ ] Run `make verify-source-integrity`.
 - [ ] Run `make metadata`.
 - [ ] Confirm `LICENSE`, `SECURITY.md`, `CONTRIBUTING.md`, and `CODEOWNERS` are present.
-- [ ] Confirm cleanup summaries are under `docs/history/cleanup/`.
+- [ ] Confirm upstream provenance is recorded in [`UPSTREAM.md`](../UPSTREAM.md).
+- [ ] Confirm release steps match [`RELEASE_PROCESS.md`](RELEASE_PROCESS.md).
 - [ ] Confirm no local build outputs are included.
 - [ ] Confirm no private credentials, tokens, or machine-local paths are included.
+- [ ] Generate `SHA256SUMS.txt` for release archives.
 
 ## If source behavior changed
 

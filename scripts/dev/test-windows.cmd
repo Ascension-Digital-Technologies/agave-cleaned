@@ -1,6 +1,7 @@
 @echo off
 setlocal
 cd /d "%~dp0\..\.."
+call scripts\dev\lib\windows-cargo-env.cmd
 echo ==^> Running tests
 cargo nextest --version >nul 2>nul
 if errorlevel 1 (

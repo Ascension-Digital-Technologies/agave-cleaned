@@ -4,4 +4,5 @@ run scripts/dev/layout.sh
 run_python scripts/dev/check-doc-links.py
 run_python scripts/dev/check-script-permissions.py
 run_python scripts/dev/check-generated-clean.py
+run_python scripts/dev/source-manifest.py --verify docs/source-manifest.json
 log "Repository hygiene checks passed"

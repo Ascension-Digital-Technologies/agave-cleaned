@@ -8,14 +8,17 @@ Use this checklist before pushing the cleaned repository to GitHub or cutting a 
 - [ ] Keep upstream license and attribution files in place.
 - [ ] Review [`README.md`](../README.md) for project positioning.
 - [ ] Run `make github-ready`.
+- [ ] Run `make verify-source-integrity`.
 - [ ] Run `make metadata` in a Rust environment.
 - [ ] Remove generated local files with `make clean-generated`.
 - [ ] Check that no source-code logic changes are mixed into repository-cleanup work.
+- [ ] Review [`UPSTREAM.md`](../UPSTREAM.md) and record the upstream commit before public release.
+- [ ] Review [`docs/source-manifest.json`](source-manifest.json).
 - [ ] Confirm GitHub issue and pull request templates match how the repository will be used.
 
-## Optional automation
+## Automation
 
-The cleaned archive intentionally does **not** include the previous top-level CI/release/provisioning trees. Add GitHub Actions, Buildkite, release automation, or infrastructure provisioning back only after deciding who owns it and how it will be tested.
+The cleaned archive intentionally does **not** include previous top-level CI/release/provisioning trees such as `ci/`, `infra/`, or `.buildkite/`. Lightweight GitHub Actions live under `.github/workflows/` and are limited to repository hygiene, source integrity, metadata, and code scanning.
 
 ## Recommended for source changes
 

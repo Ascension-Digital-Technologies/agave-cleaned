@@ -1,60 +1,78 @@
-# Windows Cargo Fetch and Check Guide
+# Windows Cargo helper guide
 
-This workspace is large enough that the first `cargo check` can fail before compilation if crates.io is slow or the local Cargo cache is empty.
+Use the Windows wrappers in `scripts/dev/` instead of plain Cargo commands when building this workspace with the GNU Windows target.
 
-The error below means Cargo resolved the local workspace successfully and then timed out while downloading an external crate:
+## Recommended commands
+
+```cmd
+scripts\dev\bootstrap-windows.cmd
+scripts\dev\diagnose-windows-build.cmd
+scripts\dev\quick-check-windows.cmd
+scripts\build.bat
+```
+
+## Why the wrappers matter
+
+Large Rust workspaces often compile native dependencies. In this repository, `openssl-sys` may build vendored OpenSSL. On `x86_64-pc-windows-gnu`, that configure step needs MSYS2 Perl, not native Windows Perl.
+
+The wrappers call:
+
+```cmd
+scripts\dev\lib\windows-cargo-env.cmd
+```
+
+before Cargo runs. That helper makes MSYS2/MinGW tools available for the current process only. It also exports compiler paths as `C:/...` instead of `C:\...` because OpenSSL runs its Makefile commands through MSYS `sh`, where backslashes are consumed as escapes.
+
+## Open a prepared shell
+
+To run direct Cargo commands safely, open a prepared shell:
+
+```cmd
+scripts\dev\enter-windows-cargo-env.cmd
+```
+
+Then run normal Cargo commands from the new shell:
+
+```cmd
+cargo metadata --no-deps
+cargo build --workspace --locked
+cargo test --workspace --locked
+```
+
+## Diagnosing problems
+
+Run:
+
+```cmd
+scripts\dev\diagnose-windows-build.cmd
+```
+
+If `perl -V:osname` reports `MSWin32`, Cargo is still seeing native Windows Perl and OpenSSL will likely fail. Install MSYS2 to `C:\msys64` or set `MSYS2_ROOT` to your install path before running the wrappers.
+
+
+## Repair stale OpenSSL build state
+
+If an earlier run failed inside `openssl-sys`, Cargo may leave a partial build directory under `target`. Use the repair wrapper to clear only the OpenSSL build directories and retry with the corrected environment:
+
+```cmd
+scripts\dev\repair-windows-openssl.cmd
+```
+
+The specific error this fixes looks like:
 
 ```text
-failed to get `rts-alloc` as a dependency of package `solana-core`
-unable to update registry `crates-io`
-curl failed
-[28] Timeout was reached
+/usr/bin/sh: line 1: C:msys64mingw64bingcc.exe: command not found
 ```
 
-## Recommended Windows flow
+That means the compiler path reached MSYS `sh` with backslashes. The v20 wrapper exports `C:/msys64/mingw64/bin/gcc.exe` instead.
 
-From the repository root, run:
 
-```powershell
-powershell -ExecutionPolicy Bypass -File .\scripts\cargo-prefetch-windows.ps1 -Check
+## Windows GNU build entrypoint
+
+Use the top-level scripts entrypoint, not a root batch file:
+
+```cmd
+scripts\build.bat
 ```
 
-Or from `cmd.exe`:
-
-```bat
-scripts\cargo-check-windows-clean-native.cmd
-```
-
-Use `scripts\cargo-check-windows.cmd` only for the lighter fetch/check path when native toolchain state is already clean.
-
-This uses:
-
-- Cargo sparse registry protocol
-- longer HTTP timeout
-- more retries
-- disabled HTTP multiplexing, which is often more reliable on Windows/corporate/VPN networks
-- `--locked`, so Cargo uses the checked-in `Cargo.lock`
-
-## Manual equivalent
-
-```powershell
-$env:CARGO_REGISTRIES_CRATES_IO_PROTOCOL = "sparse"
-$env:CARGO_NET_RETRY = "10"
-$env:CARGO_HTTP_TIMEOUT = "180"
-$env:CARGO_HTTP_LOW_SPEED_LIMIT = "1"
-$env:CARGO_HTTP_MULTIPLEXING = "false"
-$env:CARGO_NET_GIT_FETCH_WITH_CLI = "true"
-
-cargo fetch --locked
-cargo check --locked
-```
-
-## If crates.io is still timing out
-
-Try again after the prefetch command. Cargo resumes partial cache state and usually succeeds on a second run.
-
-If the network blocks crates.io entirely, use a local Cargo mirror or run from a network that allows access to the crates.io sparse index and crate downloads.
-
-## Why this is not a cleanup-path failure
-
-A broken workspace move usually fails with an error like `failed to read Cargo.toml` or `No such file or directory` for a local `path = ...` dependency. The `rts-alloc` error is different: Cargo is trying to download a published external crate from crates.io.
+The build script runs `scripts\setup-windows.ps1`, generates `.cargo\env-windows.ps1` and `.cargo\env-windows.bat`, then builds the workspace. The generated environment uses bare GNU tool names like `gcc`, `g++`, `ar`, `ranlib`, and `mingw32-make` instead of absolute `C:\...` compiler paths so vendored OpenSSL does not get broken by MSYS shell path conversion.

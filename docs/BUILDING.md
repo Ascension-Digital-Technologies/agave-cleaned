@@ -46,9 +46,12 @@ Recommended first commands:
 
 ```cmd
 scripts\dev\bootstrap-windows.cmd
+scripts\dev\diagnose-windows-build.cmd
 scripts\dev\layout-windows.cmd
 scripts\dev\check-windows.cmd
 ```
+
+For the GNU Windows target, use the `scripts\dev\*-windows.cmd` wrappers instead of plain Cargo commands. They prepare MSYS2/MinGW paths so vendored OpenSSL resolves MSYS2 Perl, not native Windows Perl, and so OpenSSL Makefiles receive `C:/...` compiler paths instead of backslash paths. If an earlier build failed inside `openssl-sys`, run `scripts\dev\repair-windows-openssl.cmd` once to clear the stale OpenSSL build directory and retry.
 
 Additional Windows docs:
 
@@ -185,3 +188,19 @@ make test
 ## Notes for this cleaned repository
 
 The restructuring changed paths, not intended behavior. If a script or doc still references an original root-level crate path, update that reference and record the mapping in [`MIGRATION_MAP.md`](MIGRATION_MAP.md) when appropriate.
+
+
+## Source integrity commands
+
+Use these commands before publishing a cleaned snapshot or after applying upstream source updates:
+
+```bash
+make source-manifest
+make verify-source-integrity
+```
+
+To compare with a local upstream Agave checkout:
+
+```bash
+make verify-upstream UPSTREAM=/path/to/anza-agave
+```

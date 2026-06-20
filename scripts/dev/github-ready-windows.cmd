@@ -6,6 +6,7 @@ set AGAVE_NO_PAUSE=1
 call scripts\dev\layout-windows.cmd || goto :fail
 python scripts\dev\check-doc-links.py || goto :fail
 python scripts\dev\check-generated-clean.py || goto :fail
+python scripts\dev\source-manifest.py --verify docs\source-manifest.json || goto :fail
 echo Repository hygiene checks passed.
 if not "%AGAVE_NO_PAUSE_PARENT%"=="1" pause
 exit /b 0

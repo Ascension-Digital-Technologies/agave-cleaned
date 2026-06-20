@@ -39,3 +39,12 @@ updates:
         - "rts-alloc"
         - "shaq"
         - "wincode"
+
+
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: weekly
+      time: "09:00"
+      timezone: Etc/UTC
+    open-pull-requests-limit: 4
