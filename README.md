@@ -1,4 +1,4 @@
-# Agave Professional
+# Agave Cleaned
 
 [![GitHub Ready](../../actions/workflows/github-ready.yml/badge.svg)](../../actions/workflows/github-ready.yml)
 [![Source Integrity](../../actions/workflows/source-integrity.yml/badge.svg)](../../actions/workflows/source-integrity.yml)
@@ -29,7 +29,7 @@ Use upstream Agave as the source of truth for protocol behavior, validator opera
 ## Repository overview
 
 ```text
-agave-professional/
+agave-cleaned/
 ├── bin/                   # user-facing Rust binary crates
 ├── crates/                # reusable Rust crates grouped by subsystem
 │   ├── accounts/
