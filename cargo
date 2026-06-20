@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+case "${1:-}" in
+  stable)
+    shift
+    exec cargo +stable "$@"
+    ;;
+  nightly)
+    shift
+    exec cargo +nightly "$@"
+    ;;
+  *)
+    exec cargo "$@"
+    ;;
+esac

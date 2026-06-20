@@ -1,0 +1,27 @@
+# Please keep this file sorted
+/crates/crypto/bloom/ @anza-xyz/networking
+/crates/crypto/bls-cert-verify/ @anza-xyz/consensus
+/crates/crypto/bls-sigverify/ @anza-xyz/consensus
+/crates/runtime/compute-budget-instruction/ @anza-xyz/fees
+/crates/consensus/core/src/consensus.rs @anza-xyz/consensus
+/crates/consensus/core/src/consensus/ @anza-xyz/consensus
+/crates/consensus/core/src/repair/ @anza-xyz/networking @anza-xyz/consensus
+/crates/runtime/fee/ @anza-xyz/fees
+/crates/consensus/gossip/ @anza-xyz/networking
+/crates/consensus/gossip/src/duplicate*.rs @anza-xyz/networking @anza-xyz/consensus
+/crates/svm/svm-log-collector/ @anza-xyz/svm
+/crates/network/net-utils/ @anza-xyz/networking
+/crates/runtime/program-runtime/ @anza-xyz/svm
+/crates/programs/bpf_loader/ @anza-xyz/svm
+/crates/runtime/runtime-transaction/ @anza-xyz/tx-metadata
+/crates/svm/svm-callback/ @anza-xyz/svm
+/crates/svm/svm/src/conformance/ @anza-xyz/svm
+# Historical path not present in this snapshot: /svm-transaction/ @anza-xyz/svm
+/crates/svm/svm/ @anza-xyz/svm
+/crates/network/tls-utils/ @anza-xyz/networking
+/crates/runtime/transaction-context/ @anza-xyz/svm
+/crates/runtime/transaction-view/ @anza-xyz/tx-metadata
+/crates/consensus/turbine/ @anza-xyz/networking
+/crates/consensus/votor/ @anza-xyz/consensus
+/crates/consensus/votor-messages/ @anza-xyz/consensus
+/crates/network/xdp/ @anza-xyz/networking

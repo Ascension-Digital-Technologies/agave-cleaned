@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Upstream Agave documentation
+    url: https://docs.anza.xyz/
+    about: Use upstream documentation for general validator, cluster, and user support questions.
+  - name: Solana Stack Exchange
+    url: https://solana.stackexchange.com/questions/ask
+    about: Ask application-development or validator-support questions here instead of opening a repository issue.

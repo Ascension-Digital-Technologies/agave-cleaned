@@ -1,0 +1,29 @@
+# Professional-clean workspace defaults.
+#
+# Windows + large Rust workspaces can occasionally fail while syncing the
+# crates.io sparse index when the default 30 second HTTP timeout is too short.
+# These settings keep Cargo on the sparse protocol and make dependency fetches
+# more tolerant of slow/unstable links without changing dependency resolution.
+
+[registries.crates-io]
+protocol = "sparse"
+
+[net]
+retry = 10
+git-fetch-with-cli = true
+
+[http]
+timeout = 180
+low-speed-limit = 1
+multiplexing = false
+
+[target.x86_64-unknown-linux-gnu]
+# When building for linux, target the minimal supported CPU
+rustflags = ["-Ctarget-cpu=x86-64-v2"]
+
+[target.aarch64-apple-darwin]
+rustflags = ["-Clinker-plugin-lto=no"]
+
+[target.x86_64-apple-darwin]
+rustflags = ["-Clinker-plugin-lto=no"]
+

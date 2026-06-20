@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if ! cargo --list | grep -q "^\s*test-sbf"; then
+  cargo install cargo-test-sbf
+fi
+exec cargo test-sbf "$@"
