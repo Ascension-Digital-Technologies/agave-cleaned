@@ -1,4 +1,4 @@
-# Agave Professional
+# Agave Cleaned
 
 A clean, GitHub-ready presentation of the official [Anza Agave](https://github.com/anza-xyz/agave) codebase. This repository was created as an unofficial cleaned-up and restructured repo for easier navigation, review, onboarding, and local maintenance; it is not an official Agave release.
 
@@ -22,7 +22,7 @@ Use upstream Agave as the source of truth for protocol behavior, validator opera
 ## Repository overview
 
 ```text
-agave-professional/
+agave-cleaned/
 ├── bin/                   # user-facing Rust binary crates
 ├── crates/                # reusable Rust crates grouped by subsystem
 │   ├── accounts/
