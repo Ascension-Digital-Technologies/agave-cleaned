@@ -94,7 +94,7 @@ symlink = { workspace = true }
 thiserror = { workspace = true }
 tokio = { workspace = true }
 
-[target.'cfg(not(any(target_env = "msvc", target_os = "freebsd")))'.dependencies]
+[target.'cfg(not(any(target_os = "windows", target_os = "freebsd")))'.dependencies]
 jemallocator = { workspace = true }
 
 [target.'cfg(target_os = "linux")'.dependencies]

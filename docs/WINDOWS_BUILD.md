@@ -171,3 +171,8 @@ scripts\build.bat
 ```
 
 The build script runs `scripts\setup-windows.ps1`, generates `.cargo\env-windows.ps1` and `.cargo\env-windows.bat`, then builds the workspace. The generated environment uses bare GNU tool names like `gcc`, `g++`, `ar`, `ranlib`, and `mingw32-make` instead of absolute `C:\...` compiler paths so vendored OpenSSL does not get broken by MSYS shell path conversion.
+
+
+## Windows GNU jemalloc note
+
+For Windows GNU builds, see [`WINDOWS_GNU_BUILD_PATCH.md`](WINDOWS_GNU_BUILD_PATCH.md).

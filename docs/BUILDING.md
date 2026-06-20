@@ -204,3 +204,8 @@ To compare with a local upstream Agave checkout:
 ```bash
 make verify-upstream UPSTREAM=/path/to/anza-agave
 ```
+
+
+## Windows GNU jemalloc note
+
+For Windows GNU builds, see [`WINDOWS_GNU_BUILD_PATCH.md`](WINDOWS_GNU_BUILD_PATCH.md).

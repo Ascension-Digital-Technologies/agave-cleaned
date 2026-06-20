@@ -187,8 +187,8 @@
     },
     {
       "path": "bin/validator/src/bin/solana-test-validator.rs",
-      "sha256": "61d6a6889e96021ae45d0f0da28275706f4e09c202521e1559ed257137415e2b",
-      "size": 23284
+      "sha256": "f7349e705a5c5d73b60c9e3e61b6a9dea308681a0739437ca2f8f866ad866355",
+      "size": 23286
     },
     {
       "path": "bin/validator/src/bootstrap.rs",
@@ -342,8 +342,8 @@
     },
     {
       "path": "bin/validator/src/main.rs",
-      "sha256": "f3ae356e48d6cc620db41a596921062f252b0dca01e20d0adf2946d7f65254c3",
-      "size": 6034
+      "sha256": "fa82284de40628cbaa9b9b1779d2d8283a88dd23b7a08cd9865f0ab69d0d67f1",
+      "size": 6038
     },
     {
       "path": "bin/validator/tests/cli.rs",
@@ -427,33 +427,33 @@
     },
     {
       "path": "crates/accounts/accounts-db/benches/accounts_index.rs",
-      "sha256": "7f428bdfd6cbd04037ee58079fe6001be5308ea3265d8217daded85ae7270865",
-      "size": 2001
+      "sha256": "1e0e724f01805fcf30bedc9c150aa926233d7fdc9d70b23f307cf52e3d136e32",
+      "size": 2003
     },
     {
       "path": "crates/accounts/accounts-db/benches/bench_accounts_file.rs",
-      "sha256": "119194a98d08fd22e7c387ebfc3f27a2e8a42a78cfdfe85ff480440019f029c6",
-      "size": 8691
+      "sha256": "9220e1036fc302bf02bec5412d2ebfeced946fe1ff9381cb96bd559d59a8eecf",
+      "size": 8693
     },
     {
       "path": "crates/accounts/accounts-db/benches/bench_hashing.rs",
-      "sha256": "f3ba5bbd180d323350cad5c3fd10080cab994cd6c672dbe4ed6d009eeaf178f2",
-      "size": 1628
+      "sha256": "f5bce713f891cd9c88f25dd2e991f9fbd1abaa1b5176d54dbd72062e3f7fefce",
+      "size": 1630
     },
     {
       "path": "crates/accounts/accounts-db/benches/bench_lock_accounts.rs",
-      "sha256": "17e4a26cf75a6a8f45d0d291e0109e7d91f541f8dd8cd0cc47b3b2c5833b846b",
-      "size": 3913
+      "sha256": "0e52fef8e0dbd9a110b2b26cf6a46dc3f3c0d59215ae9a66bbf3b564a8c65e84",
+      "size": 3915
     },
     {
       "path": "crates/accounts/accounts-db/benches/bench_serde.rs",
-      "sha256": "80db2be8c5231f1681b1d0a57974c3dc8b71c0d5b07edc985cd8522f0c303029",
-      "size": 4948
+      "sha256": "d11d71a076aeaed3b630c46f0a185ee9de0d91665f468627cafe6745364036aa",
+      "size": 4950
     },
     {
       "path": "crates/accounts/accounts-db/benches/read_only_accounts_cache.rs",
-      "sha256": "a75157296bf9bc782b8aa0118a03e0f58b6cdede676596eca650e2fd5de0b0ea",
-      "size": 12719
+      "sha256": "4add5d33a2fbd973df17c7307f0c45dff2fea98d4ef07d710515d6f2df7f5f57",
+      "size": 12721
     },
     {
       "path": "crates/accounts/accounts-db/benches/utils.rs",
@@ -1437,8 +1437,8 @@
     },
     {
       "path": "crates/consensus/core/src/system_monitor_service.rs",
-      "sha256": "709a7852b95de2ba8887c907974ee88eb52b7224d843b54aafebbb6bbf3a9423",
-      "size": 53354
+      "sha256": "79e704d87057f57ac3b21291348672b69b81b8d6b8117cc6699c6e03b53e5a2e",
+      "size": 53358
     },
     {
       "path": "crates/consensus/core/src/tpu.rs",
@@ -1777,13 +1777,13 @@
     },
     {
       "path": "crates/consensus/poh/benches/poh.rs",
-      "sha256": "c66607fdae579ffae9407cfe1f4b54c9ed1d115f1e3a428c5010998555a2983a",
-      "size": 5283
+      "sha256": "d1a7bc2f20ee4133acf84fddf7771df07790490272b254896d2f72dd32a7796b",
+      "size": 5285
     },
     {
       "path": "crates/consensus/poh/benches/poh_verify.rs",
-      "sha256": "8fa7744bbe630b560dd7d262a0128590cd869f06daea360a3cb32d54f3f69913",
-      "size": 1670
+      "sha256": "b81b7bd3ad1dd4575cb735b9393866e7ee8626fbc81ddfe5a0e37159185dffea",
+      "size": 1672
     },
     {
       "path": "crates/consensus/poh/benches/transaction_recorder.rs",
@@ -4277,8 +4277,8 @@
     },
     {
       "path": "crates/runtime/runtime/benches/epoch_turnover.rs",
-      "sha256": "155ab6ca1110ec3348996c431168522cd65c335f241fb9d3d396171a1d6a45c0",
-      "size": 7250
+      "sha256": "6ceb49272dc45e29390325fc7768ffeaf2a9cadc54a476f5720c80b5dfc9e996",
+      "size": 7252
     },
     {
       "path": "crates/runtime/runtime/benches/prioritization_fee_cache.rs",
@@ -6202,8 +6202,8 @@
     },
     {
       "path": "crates/utils/perf/benches/dedup.rs",
-      "sha256": "970287016f909258368d09c6cbc2e0cbfb5d6a198e26da0ab8ce1b5e968d2492",
-      "size": 3419
+      "sha256": "d4a8e5025c80f3f33fda4e7cc2f5d8f0c5cd7f1baeddb4d7ce6c75d4e7d540db",
+      "size": 3421
     },
     {
       "path": "crates/utils/perf/benches/recycler.rs",
@@ -6212,13 +6212,13 @@
     },
     {
       "path": "crates/utils/perf/benches/reset.rs",
-      "sha256": "3990b4b7965a368fab53aea0a02891f121164384309bea3afd2d8956fcc1ee84",
-      "size": 1140
+      "sha256": "e6d83785fedd62d58d1a1fb17e0e1158e911a963f42353c3d980f668ca3b81a9",
+      "size": 1142
     },
     {
       "path": "crates/utils/perf/benches/sigverify.rs",
-      "sha256": "de819e32bbeb3045936ec1af9dc4009401349357efc957467494a8bd15bd7f79",
-      "size": 5527
+      "sha256": "7fc4b39174397d93cfdff61f015abf746582c23e736383a1dfd805cfb4395645",
+      "size": 5529
     },
     {
       "path": "crates/utils/perf/build.rs",
@@ -6277,8 +6277,8 @@
     },
     {
       "path": "tools/benchmarks/accounts-cluster-bench/src/main.rs",
-      "sha256": "3c3a0c41351d889c4cd71573265a4b6e307d8e808a8ffc68ebcadbdace8afbef",
-      "size": 61852
+      "sha256": "4be4108941673295e14db00af572afed22673d6d1138751d9f9450c91771bfc5",
+      "size": 61854
     },
     {
       "path": "tools/benchmarks/poh-bench/src/main.rs",
@@ -6362,8 +6362,8 @@
     },
     {
       "path": "tools/ledger-tool/src/main.rs",
-      "sha256": "cb26306d46e14ffec39742b82c28853d49886678ccc04aed603118460f462700",
-      "size": 150931
+      "sha256": "a3c7c6d1dc2f579043664cbfb39134550efba53a3f6fa16c77355b094f4f67d4",
+      "size": 150935
     },
     {
       "path": "tools/ledger-tool/src/output.rs",
@@ -6386,7 +6386,7 @@
       "size": 189
     }
   ],
-  "generated_at_utc": "2026-06-20T19:04:48+00:00",
+  "generated_at_utc": "2026-06-20T20:01:17+00:00",
   "repository": "agave-professional",
   "schema": "agave-professional-source-manifest-v1",
   "source_extensions": [

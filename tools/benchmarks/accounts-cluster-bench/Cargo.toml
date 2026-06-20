@@ -46,7 +46,7 @@ solana-version = { workspace = true }
 spl-generic-token = { workspace = true }
 spl-token-interface = { workspace = true }
 
-[target.'cfg(not(any(target_env = "msvc", target_os = "freebsd")))'.dependencies]
+[target.'cfg(not(any(target_os = "windows", target_os = "freebsd")))'.dependencies]
 jemallocator = { workspace = true }
 
 [dev-dependencies]

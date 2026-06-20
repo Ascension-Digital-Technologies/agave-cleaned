@@ -11,7 +11,7 @@ use {
     test::Bencher,
 };
 
-#[cfg(not(any(target_env = "msvc", target_os = "freebsd")))]
+#[cfg(not(any(target_os = "windows", target_os = "freebsd")))]
 #[global_allocator]
 static GLOBAL: jemallocator::Jemalloc = jemallocator::Jemalloc;
 

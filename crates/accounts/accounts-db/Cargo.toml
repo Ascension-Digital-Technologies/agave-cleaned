@@ -114,7 +114,7 @@ strum = { workspace = true, features = ["derive"] }
 strum_macros = { workspace = true }
 test-case = { workspace = true }
 
-[target.'cfg(not(any(target_env = "msvc", target_os = "freebsd")))'.dev-dependencies]
+[target.'cfg(not(any(target_os = "windows", target_os = "freebsd")))'.dev-dependencies]
 jemallocator = { workspace = true }
 
 [[bench]]
