@@ -1,4 +1,4 @@
-# Agave Professional
+# Agave - Cleaned and Restructed
 
 [![GitHub Ready](../../actions/workflows/github-ready.yml/badge.svg)](../../actions/workflows/github-ready.yml)
 [![Source Integrity](../../actions/workflows/source-integrity.yml/badge.svg)](../../actions/workflows/source-integrity.yml)
